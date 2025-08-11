@@ -221,7 +221,7 @@ body[data-theme="aetherial-light"] .main-btn {
 }
 
 #result-content-wrapper {
-    text-align: left;
+    text-align: justify;
     background-color: var(--surface);
     border-radius: var(--border-radius);
     border: 1px solid var(--border);
