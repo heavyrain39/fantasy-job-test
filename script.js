@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 데이터 영역 (이전과 동일) ---
+    // --- 데이터 영역 (상세 버전) ---
     const questions = [
         { q: "오랜 여정을 마치고 당신의 앞에 두 갈래의 휴식처가 나타났습니다. 한 곳은 따뜻한 모닥불 주위에 모여 앉아 이야기와 음식을 나누는 활기찬 야영지입니다. 다른 한 곳은 희미한 폭포 소리가 들려오는 숨겨진 동굴입니다. 당신의 발걸음은 어디로 향하나요?", a: "활기찬 야영지에서 다른 이들과 교류하며 피로를 풉니다.", b: "고요한 동굴에서 조용한 시간을 가지며 에너지를 회복합니다." },
         { q: "당신이 속한 왕국에 가뭄이 들어 모두가 고통받고 있습니다. 당신은 단 하나뿐인 마법 우물을 사용할 권한을 얻었습니다. 이 우물물을 어떻게 사용하시겠습니까?", a: "공정하게, 원칙에 따라 모든 이에게 똑같이 나누어 줍니다.", b: "가장 도움이 절실한 이들에게 먼저, 그리고 더 많이 나누어 줍니다." },
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const options = {
             backgroundColor: currentTheme === 'aetherial-light' ? '#F8F9FA' : '#3B4252',
             scale: 2,
-            useCORS: true // [중요] CORS 옵션 추가
+            useCORS: true
         };
 
         html2canvas(resultWrapper, options).then(canvas => {
@@ -177,7 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
             link.href = canvas.toDataURL('image/png');
             link.click();
         }).catch(err => {
-            console.error("이미지 생성 오류!", err);
+            console.error("이미지 생성 오류! 로컬 서버 환경에서 실행하고 있는지 확인해주세요.", err);
+            alert("이미지 생성에 실패했습니다. 로컬 파일(file://) 환경에서는 브라우저 보안 정책으로 인해 작동하지 않을 수 있습니다.");
         });
     };
 
@@ -194,19 +195,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${resultData.content}
             </div>
             <div id="share-button-wrapper">
-                <button id="download-btn" class="main-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5-.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
-                        <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
-                    </svg>
-                    <span>이미지로 공유하기</span>
-                </button>
+                <div class="result-buttons-wrapper">
+                    <button id="home-btn" class="main-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+                        </svg>
+                        <span>처음으로</span>
+                    </button>
+                    <button id="download-btn" class="main-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5-.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
+                            <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
+                        </svg>
+                        <span>이미지로 공유하기</span>
+                    </button>
+                </div>
             </div>
         `;
         
         updateView('result');
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
+        document.getElementById('home-btn').addEventListener('click', showInitialScreen);
         document.getElementById('download-btn').addEventListener('click', downloadResultAsImage);
     };
     

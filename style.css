@@ -280,6 +280,14 @@ body[data-theme="aetherial-light"] .result-image {
     text-align: center;
 }
 
+/* [추가] 결과 화면 버튼들을 감싸는 래퍼 스타일 */
+.result-buttons-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
 
 /* --- 7. Footer & Theme Selector --- */
 .footer {
